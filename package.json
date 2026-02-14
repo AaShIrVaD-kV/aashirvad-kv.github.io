@@ -1,0 +1,11 @@
+{
+  "name": "portfolio-website",
+  "version": "1.0.0",
+  "description": "Aashirvad K Varghese Portfolio",
+  "scripts": {
+    "start": "npx -y serve ."
+  },
+  "keywords": [],
+  "author": "Aashirvad K Varghese",
+  "license": "ISC"
+}
