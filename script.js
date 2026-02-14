@@ -4,16 +4,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const links = document.querySelectorAll('.nav-links a');
     const preloader = document.getElementById('preloader');
 
-    // Remove Preloader
+    // Remove Clean System Loader
     window.addEventListener('load', () => {
-        // Minimum 2.5s wait to show off animation, or until load wraps up
+        // Minimum 1.5s wait for smooth animation, then fade out
         setTimeout(() => {
-            preloader.style.opacity = '0';
-            preloader.style.visibility = 'hidden';
-
-            // Start AOS after loader is gone for smooth entry
-            AOS.refresh();
-        }, 2500);
+            const preloader = document.getElementById('preloader');
+            preloader.classList.add('fade-out');
+            
+            // Remove from DOM after fade animation and refresh AOS
+            setTimeout(() => {
+                preloader.remove();
+                // Start AOS after loader is gone for smooth entry
+                AOS.refresh();
+            }, 500);
+        }, 1500);
     });
 
     // Toggle Mobile Menu

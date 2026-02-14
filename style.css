@@ -636,7 +636,7 @@
                 }
 
                 /* -------------------------------------------------------------------------- */
-                /*                                 Preloader                                  */
+                /*                           Clean System Loader                           */
                 /* -------------------------------------------------------------------------- */
                 #preloader {
                     position: fixed;
@@ -644,89 +644,77 @@
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    background: #050510;
+                    background: #0B1120;
                     z-index: 10000;
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-                }
-
-                .loader-content {
-                    text-align: center;
-                    width: 300px;
-                }
-
-                .loader-circle {
-                    width: 50px;
-                    height: 50px;
-                    border: 3px solid rgba(108, 99, 255, 0.3);
-                    border-top: 3px solid var(--primary-color);
-                    border-radius: 50%;
-                    margin: 0 auto 20px;
-                    animation: spin 1s linear infinite;
-                }
-
-                .loader-text {
-                    font-family: 'Courier New', monospace;
-                    color: var(--primary-color);
-                    letter-spacing: 2px;
-                    margin-bottom: 10px;
-                    font-size: 0.9rem;
-                    animation: blink 1s infinite alternate;
-                }
-
-                .loader-bar {
-                    width: 100%;
-                    height: 4px;
-                    background: rgba(255, 255, 255, 0.1);
-                    border-radius: 2px;
                     overflow: hidden;
                 }
 
-                .loader-progress {
-                    width: 0%;
-                    height: 100%;
-                    background: var(--primary-color);
-                    animation: loadProgress 2.5s ease-in-out forwards;
+                .system-loader {
+                    position: relative;
+                    width: 60px;
+                    height: 60px;
                 }
 
-                @keyframes spin {
+                .outer-ring {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    border: 1px solid rgba(0, 229, 255, 0.3);
+                    border-top: 1px solid var(--accent-color);
+                    border-radius: 50%;
+                    animation: rotate-clockwise 2s linear infinite;
+                }
+
+                .inner-ring {
+                    position: absolute;
+                    top: 10px;
+                    left: 10px;
+                    width: 40px;
+                    height: 40px;
+                    border: 1px solid rgba(0, 229, 255, 0.2);
+                    border-bottom: 1px solid var(--accent-color);
+                    border-radius: 50%;
+                    animation: rotate-counter-clockwise 1.5s linear infinite;
+                }
+
+                .center-dot {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 6px;
+                    height: 6px;
+                    background: var(--accent-color);
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%);
+                    box-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+                }
+
+                @keyframes rotate-clockwise {
                     0% {
                         transform: rotate(0deg);
                     }
-
                     100% {
                         transform: rotate(360deg);
                     }
                 }
 
-                @keyframes blink {
+                @keyframes rotate-counter-clockwise {
                     0% {
-                        opacity: 0.5;
+                        transform: rotate(0deg);
                     }
-
                     100% {
-                        opacity: 1;
+                        transform: rotate(-360deg);
                     }
                 }
 
-                @keyframes loadProgress {
-                    0% {
-                        width: 0%;
-                    }
-
-                    40% {
-                        width: 30%;
-                    }
-
-                    70% {
-                        width: 70%;
-                    }
-
-                    100% {
-                        width: 100%;
-                    }
+                .fade-out {
+                    opacity: 0;
+                    transition: opacity 0.5s ease;
                 }
 
                 /* -------------------------------------------------------------------------- */
