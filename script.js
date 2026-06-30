@@ -118,13 +118,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initialize Typed.js
-    // Initialize Typed.js
     new Typed('.auto-type', {
-        strings: ["Aspiring Data Scientist"],
-        typeSpeed: 100,
-        backSpeed: 50,
+        strings: [
+            "Data Analyst",
+            "Business Analyst",
+            "Reporting Analyst",
+            "MIS Executive",
+            "Junior Data Scientist"
+        ],
+        typeSpeed: 60,
+        backSpeed: 40,
+        backDelay: 1500,
         loop: true,
-        fadeOut: true,
     });
 
     // Custom Cursor Logic
@@ -147,56 +152,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // Popup Modal Logic
-    const popupModal = document.getElementById('popup-modal');
-    const popupClose = document.getElementById('popup-close');
-    const popupAction = document.getElementById('popup-action');
+    // Resume Modal Logic
+    const viewResumeBtn = document.getElementById('view-resume-btn');
+    const resumeModal = document.getElementById('resume-modal');
+    const resumeModalClose = document.getElementById('resume-modal-close');
+    const resumeIframe = document.getElementById('resume-iframe');
 
-    // Show popup after 10 seconds (if not already seen in session)
-    if (!sessionStorage.getItem('popupShown')) {
-        setTimeout(() => {
-            if (popupModal) {
-                popupModal.classList.add('active');
-                sessionStorage.setItem('popupShown', 'true');
+    const openResumeModal = () => {
+        if (resumeIframe) {
+            const currentSrc = resumeIframe.getAttribute('src');
+            if (!currentSrc || !currentSrc.endsWith('.pdf')) {
+                const isNested = window.location.pathname.includes('/aashirvad-kv.github.io');
+                resumeIframe.setAttribute('src', isNested ? "../NEW_ASSETS/Aashirvad_KV_.pdf" : "NEW_ASSETS/Aashirvad_KV_.pdf");
             }
-        }, 10000); // 10 seconds
-    }
-
-    // Close Modal Function
-    const closeModal = () => {
-        popupModal.classList.remove('active');
+        }
+        if (resumeModal) {
+            resumeModal.classList.add('active');
+        }
     };
 
-    if (popupClose) popupClose.addEventListener('click', closeModal);
-    if (popupAction) popupAction.addEventListener('click', closeModal);
+    const closeResumeModal = () => {
+        if (resumeModal) {
+            resumeModal.classList.remove('active');
+        }
+    };
 
-    // Close if clicking outside
-    if (popupModal) {
-        popupModal.addEventListener('click', (e) => {
-            if (e.target === popupModal) {
-                closeModal();
+    if (viewResumeBtn) viewResumeBtn.addEventListener('click', openResumeModal);
+    if (resumeModalClose) resumeModalClose.addEventListener('click', closeResumeModal);
+
+    // Close on overlay click
+    if (resumeModal) {
+        resumeModal.addEventListener('click', (e) => {
+            if (e.target === resumeModal) {
+                closeResumeModal();
             }
         });
     }
+
+    // Close on Escape key press
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && resumeModal && resumeModal.classList.contains('active')) {
+            closeResumeModal();
+        }
+    });
 });
 
-// --------------------------------------------------------------------------
-//                              Certificates Display Logic
-// --------------------------------------------------------------------------
-document.addEventListener('DOMContentLoaded', () => {
-    const trigger = document.getElementById('ds-certs-trigger');
-    const container = document.getElementById('cert-display-container');
-
-    if (trigger && container) {
-        trigger.addEventListener('click', function () {
-            container.classList.toggle('active');
-
-            // Smooth scroll to container if opening
-            if (container.classList.contains('active')) {
-                setTimeout(() => {
-                    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
-            }
-        });
-    }
-});
