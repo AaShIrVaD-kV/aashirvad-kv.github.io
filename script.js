@@ -162,8 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (resumeIframe) {
             const currentSrc = resumeIframe.getAttribute('src');
             if (!currentSrc || !currentSrc.endsWith('.pdf')) {
-                const isNested = window.location.pathname.includes('/aashirvad-kv.github.io');
-                resumeIframe.setAttribute('src', isNested ? "../NEW_ASSETS/Aashirvad_KV_.pdf" : "NEW_ASSETS/Aashirvad_KV_.pdf");
+                resumeIframe.setAttribute('src', "NEW_ASSETS/Aashirvad_KV_.pdf");
             }
         }
         if (resumeModal) {
