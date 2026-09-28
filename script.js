@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (resumeIframe) {
             const currentSrc = resumeIframe.getAttribute('src');
             if (!currentSrc || !currentSrc.endsWith('.pdf')) {
-                resumeIframe.setAttribute('src', "NEW_ASSETS/Aashirvad_KV_.pdf");
+                resumeIframe.setAttribute('src', "NEW_ASSETS/Aashirvad_KV.pdf");
             }
         }
         if (resumeModal) {
